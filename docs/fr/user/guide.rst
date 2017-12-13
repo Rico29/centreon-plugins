@@ -455,13 +455,17 @@ Vous pouvez vérifier des équipements ipv6 en SNMP via la syntaxe suivante (``u
   $ perl centreon_plugins.pl --plugin=os::linux::snmp::plugin --hostname='udp6:[fe80::250:56ff:feb5:6ae0]' --mode=storage --snmp-version=2c --snmp-community=public
 
 ------------------------------------------------------------
-Comment puis-je vérifier la valeur d'un OID SNMP générique ?
+Comment puis-je vérifier la valeur d'un 
+
+
+
+SNMP générique ?
 ------------------------------------------------------------
 
 Il y a un plugin SNMP générique pour vérifier cela. Voici un exemple pour obtenir l'OID SNMP 'SysUptime' :
 ::
 
-  $ perl centreon_plugins.pl --plugin=snmp_standard::plugin --mode=numeric-value --oid='.1.3.6.1.2.1.1.3.0' --hostname=127.0.0.1 --snmp-version=2c --snmp-community=public
+  $ perl centreon_plugins.pl --plugin=apps::protocols::snmp::plugin --mode=numeric-value --oid='.1.3.6.1.2.1.1.3.0' --hostname=127.0.0.1 --snmp-version=2c --snmp-community=public
 
 ---------------------------------------------------------------------
 Comment utiliser un serveur memcached pour la rétention des données ?
