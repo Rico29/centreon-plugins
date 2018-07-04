@@ -81,24 +81,23 @@ C'est exactement ce dont j'ai besoin. Maintenant je vais utiliser l'option ``--l
   $ perl centreon_plugins.pl --plugin=os::linux::snmp::plugin --list-mode
   ...
   Modes Available:
-   processcount
-   time
-   list-storages
+   cpu
+   cpu-detailed
    disk-usage
    diskio
-   uptime
-   swap
-   cpu-detailed
-   load
-   traffic
-   cpu
    inodes
+   interfaces
    list-diskspath
    list-interfaces
-   packet-errors
+   list-storages
+   load
    memory
-   tcpcon
+   processcount
    storage
+   swap
+   tcpcon
+   time
+   uptime
 
 J'aimerais tester le mode 'load':
 ::
@@ -461,7 +460,7 @@ Comment puis-je vérifier la valeur d'un OID SNMP générique ?
 Il y a un plugin SNMP générique pour vérifier cela. Voici un exemple pour obtenir l'OID SNMP 'SysUptime' :
 ::
 
-  $ perl centreon_plugins.pl --plugin=snmp_standard::plugin --mode=numeric-value --oid='.1.3.6.1.2.1.1.3.0' --hostname=127.0.0.1 --snmp-version=2c --snmp-community=public
+  $ perl centreon_plugins.pl --plugin=apps::protocols::snmp::plugin --mode=numeric-value --oid='.1.3.6.1.2.1.1.3.0' --hostname=127.0.0.1 --snmp-version=2c --snmp-community=public
 
 ---------------------------------------------------------------------
 Comment utiliser un serveur memcached pour la rétention des données ?
@@ -476,7 +475,7 @@ Pour utiliser 'memcached', vous devez avoir un serveur memcached et le module CP
 Vous pouvez renseigner le serveur memcached avec l'option ``--memcached``:
 ::
 
-  $ perl centreon_plugins.pl --plugin=os::linux::snmp::plugin --mode=traffic --hostname=127.0.0.1 --snmp-version=2c --snmp-community=public --verbose --skip --skip-speed0 --memcached=127.0.0.1
+  $ perl centreon_plugins.pl --plugin=os::linux::snmp::plugin --mode=interfaces --hostname=127.0.0.1 --snmp-version=2c --snmp-community=public --verbose --add-traffic --memcached=127.0.0.1
   OK: All traffic are ok | 'traffic_in_lo'=197.40b/s;;;0;10000000 'traffic_out_lo'=197.40b/s;;;0;10000000 'traffic_in_eth0'=14539.11b/s;;;0;1000000000 'traffic_out_eth0'=399.59b/s;;;0;1000000000 'traffic_in_eth1'=13883.82b/s;;;0;1000000000 'traffic_out_eth1'=1688.66b/s;;;0;1000000000
   Interface 'lo' Traffic In : 197.40b/s (0.00 %), Out : 197.40b/s (0.00 %)
   Interface 'eth0' Traffic In : 14.54Kb/s (0.00 %), Out : 399.59b/s (0.00 %)

@@ -1,5 +1,5 @@
 #
-# Copyright 2017 Centreon (http://www.centreon.com/)
+# Copyright 2018 Centreon (http://www.centreon.com/)
 #
 # Centreon is a full-fledged industry-strength solution that meets
 # the needs in IT infrastructure and application monitoring for
@@ -47,9 +47,10 @@ sub new {
                       "freebox-app-id:s@"       => { name => 'freebox_app_id' },
                       "freebox-app-token:s@"    => { name => 'freebox_app_token' },
                       "freebox-api-version:s@"  => { name => 'freebox_api_version', },
-                      "proxyurl:s@"         => { name => 'proxyurl' },
-                      "timeout:s@"          => { name => 'timeout' },
-                      "resolution:s@"       => { name => 'resolution' },
+                      "proxyurl:s@"             => { name => 'proxyurl' },
+                      "timeout:s@"              => { name => 'timeout' },
+                      "ssl-opt:s@"              => { name => 'ssl_opt' },
+                      "resolution:s@"           => { name => 'resolution' },
                     });
     }
     $options{options}->add_help(package => __PACKAGE__, sections => 'REST API OPTIONS', once => 1);
@@ -292,6 +293,10 @@ Proxy URL if any.
 =item B<--timeout>
 
 Set HTTP timeout in seconds (Default: '10').
+
+=item B<--ssl-opt>
+
+Set SSL Options (--ssl-opt="SSL_version => TLSv1" --ssl-opt="SSL_verify_mode => SSL_VERIFY_NONE").
 
 =item B<--resolution>
 

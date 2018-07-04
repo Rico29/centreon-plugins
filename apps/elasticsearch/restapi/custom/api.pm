@@ -1,5 +1,5 @@
 #
-# Copyright 2017 Centreon (http://www.centreon.com/)
+# Copyright 2018 Centreon (http://www.centreon.com/)
 #
 # Centreon is a full-fledged industry-strength solution that meets
 # the needs in IT infrastructure and application monitoring for
@@ -49,6 +49,7 @@ sub new {
                       "password:s@" => { name => 'password' },
                       "proxyurl:s@" => { name => 'proxyurl' },
                       "timeout:s@"  => { name => 'timeout' },
+                      "ssl-opt:s@"  => { name => 'ssl_opt' },
                     });
     }
     $options{options}->add_help(package => __PACKAGE__, sections => 'REST API OPTIONS', once => 1);
@@ -115,6 +116,7 @@ sub build_options_for_httplib {
     $self->{option_results}->{proto} = $self->{proto};
     $self->{option_results}->{proxyurl} = $self->{proxyurl};
     $self->{option_results}->{credentials} = 1;
+    $self->{option_results}->{basic} = 1;
     $self->{option_results}->{username} = $self->{username};
     $self->{option_results}->{password} = $self->{password};
 }
@@ -192,6 +194,10 @@ Proxy URL if any
 =item B<--timeout>
 
 Set HTTP timeout
+
+=item B<--ssl-opt>
+
+Set SSL Options (--ssl-opt="SSL_version => TLSv1" --ssl-opt="SSL_verify_mode => SSL_VERIFY_NONE").
 
 =back
 

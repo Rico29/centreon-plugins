@@ -1,5 +1,5 @@
 #
-# Copyright 2017 Centreon (http://www.centreon.com/)
+# Copyright 2018 Centreon (http://www.centreon.com/)
 #
 # Centreon is a full-fledged industry-strength solution that meets
 # the needs in IT infrastructure and application monitoring for
@@ -47,14 +47,15 @@ sub new {
     if (!defined($options{noptions})) {
         $options{options}->add_options(arguments => 
                     {
-                      "hostname:s@"      => { name => 'hostname', },
-                      "port:s@"          => { name => 'port', },
-                      "proto:s@"         => { name => 'proto', },
-                      "urlpath:s@"       => { name => 'url_path', },
-                      "proxyurl:s@"      => { name => 'proxyurl', },
-                      "username:s@"      => { name => 'username', },
-                      "password:s@"      => { name => 'password', },
-                      "timeout:s@"       => { name => 'timeout', },
+                      "hostname:s@"      => { name => 'hostname' },
+                      "port:s@"          => { name => 'port' },
+                      "proto:s@"         => { name => 'proto' },
+                      "urlpath:s@"       => { name => 'url_path' },
+                      "proxyurl:s@"      => { name => 'proxyurl' },
+                      "username:s@"      => { name => 'username' },
+                      "password:s@"      => { name => 'password' },
+                      "timeout:s@"       => { name => 'timeout' },
+                      "ssl-opt:s@"       => { name => 'ssl_opt' },
                     });
     }
     $options{options}->add_help(package => __PACKAGE__, sections => 'P2000 OPTIONS', once => 1);
@@ -307,6 +308,10 @@ Password to connect.
 =item B<--timeout>
 
 Set HTTP timeout
+
+=item B<--ssl-opt>
+
+Set SSL Options (--ssl-opt="SSL_version => TLSv1" --ssl-opt="SSL_verify_mode => SSL_VERIFY_NONE").
 
 =back
 

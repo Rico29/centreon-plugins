@@ -1,5 +1,5 @@
 #
-# Copyright 2017 Centreon (http://www.centreon.com/)
+# Copyright 2018 Centreon (http://www.centreon.com/)
 #
 # Centreon is a full-fledged industry-strength solution that meets
 # the needs in IT infrastructure and application monitoring for
@@ -42,14 +42,17 @@ sub new {
          "proto:s"       => { name => 'proto' },
          "urlpath:s"     => { name => 'url_path' },
          "credentials"   => { name => 'credentials' },
-         "ntlm"          => { name => 'ntlm' },
+         "basic"         => { name => 'basic' },
+         "ntlm"          => { name => 'ntlm' }, # Deprecated
+         "ntlmv2"        => { name => 'ntlmv2' },
          "username:s"    => { name => 'username' },
          "password:s"    => { name => 'password' },
          "proxyurl:s"    => { name => 'proxyurl' },
          "proxypac:s"    => { name => 'proxypac' },
          "timeout:s"     => { name => 'timeout' },
          "no-follow"     => { name => 'no_follow', },
-         "ssl:s"		 => { name => 'ssl' },
+         "ssl:s"         => { name => 'ssl' },
+         "ssl-opt:s@"    => { name => 'ssl_opt' },
          "cert-file:s"   => { name => 'cert_file' },
          "key-file:s"    => { name => 'key_file' },
          "cacert-file:s" => { name => 'cacert_file' },
@@ -172,19 +175,27 @@ Set path to get webpage (Default: '/')
 
 =item B<--credentials>
 
-Specify this option if you access webpage over basic authentification
-
-=item B<--ntlm>
-
-Specify this option if you access webpage over ntlm authentification (Use with --credentials option)
+Specify this option if you access webpage with authentication
 
 =item B<--username>
 
-Specify username for basic authentification (Mandatory if --credentials is specidied)
+Specify username for authentication (Mandatory if --credentials is specified)
 
 =item B<--password>
 
-Specify password for basic authentification (Mandatory if --credentials is specidied)
+Specify password for authentication (Mandatory if --credentials is specified)
+
+=item B<--basic>
+
+Specify this option if you access webpage over basic authentication and don't want a '401 UNAUTHORIZED' error to be logged on your webserver.
+
+Specify this option if you access webpage over hidden basic authentication or you'll get a '404 NOT FOUND' error.
+
+(Use with --credentials)
+
+=item B<--ntlmv2>
+
+Specify this option if you access webpage over ntlmv2 authentication (Use with --credentials and --port options)
 
 =item B<--proxyurl>
 
@@ -202,9 +213,9 @@ Threshold for HTTP timeout (Default: 5)
 
 Do not follow http redirect
 
-=item B<--ssl>
+=item B<--ssl-opt>
 
-Specify SSL version (example : 'sslv3', 'tlsv1'...)
+Set SSL Options (--ssl-opt="SSL_version => TLSv1" --ssl-opt="SSL_verify_mode => SSL_VERIFY_NONE").
 
 =item B<--cert-file>
 

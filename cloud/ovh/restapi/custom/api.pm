@@ -1,5 +1,5 @@
 #
-# Copyright 2017 Centreon (http://www.centreon.com/)
+# Copyright 2018 Centreon (http://www.centreon.com/)
 #
 # Centreon is a full-fledged industry-strength solution that meets
 # the needs in IT infrastructure and application monitoring for
@@ -48,12 +48,13 @@ sub new {
     if (!defined($options{noptions})) {
         $options{options}->add_options(arguments => 
                     {
-                      "ovh-type:s@"                 => { name => 'ovh_type', },
-                      "ovh-application-key:s@"      => { name => 'ovh_application_key', },
-                      "ovh-application-secret:s@"   => { name => 'ovh_application_secret', },
-                      "ovh-consumer-key:s@"         => { name => 'ovh_consumer_key', },
-                      "proxyurl:s@" => { name => 'proxyurl', },
-                      "timeout:s@"  => { name => 'timeout', },
+                      "ovh-type:s@"                 => { name => 'ovh_type' },
+                      "ovh-application-key:s@"      => { name => 'ovh_application_key' },
+                      "ovh-application-secret:s@"   => { name => 'ovh_application_secret' },
+                      "ovh-consumer-key:s@"         => { name => 'ovh_consumer_key' },
+                      "proxyurl:s@"                 => { name => 'proxyurl' },
+                      "timeout:s@"                  => { name => 'timeout' },
+                      "ssl-opt:s@"                  => { name => 'ssl_opt' },
                     });
     }
     $options{options}->add_help(package => __PACKAGE__, sections => 'REST API OPTIONS', once => 1);
@@ -249,6 +250,10 @@ Proxy URL if any
 =item B<--timeout>
 
 Set HTTP timeout
+
+=item B<--ssl-opt>
+
+Set SSL Options (--ssl-opt="SSL_version => TLSv1" --ssl-opt="SSL_verify_mode => SSL_VERIFY_NONE").
 
 =back
 

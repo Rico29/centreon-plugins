@@ -1,5 +1,5 @@
 #
-# Copyright 2017 Centreon (http://www.centreon.com/)
+# Copyright 2018 Centreon (http://www.centreon.com/)
 #
 # Centreon is a full-fledged industry-strength solution that meets
 # the needs in IT infrastructure and application monitoring for
@@ -43,11 +43,12 @@ sub new {
     if (!defined($options{noptions})) {
         $options{options}->add_options(arguments => 
                     {
-                      "hostname:s@"         => { name => 'hostname', },
-                      "xtremio-username:s@" => { name => 'xtremio_username', },
-                      "xtremio-password:s@" => { name => 'xtremio_password', },
-                      "proxyurl:s@"         => { name => 'proxyurl', },
-                      "timeout:s@"          => { name => 'timeout', },
+                      "hostname:s@"         => { name => 'hostname' },
+                      "xtremio-username:s@" => { name => 'xtremio_username' },
+                      "xtremio-password:s@" => { name => 'xtremio_password' },
+                      "proxyurl:s@"         => { name => 'proxyurl' },
+                      "timeout:s@"          => { name => 'timeout' },
+                      "ssl-opt:s@"          => { name => 'ssl_opt' },
                       "reload-cache-time:s" => { name => 'reload_cache_time' },
                     });
     }
@@ -283,6 +284,10 @@ Proxy URL if any
 =item B<--timeout>
 
 Set HTTP timeout
+
+=item B<--ssl-opt>
+
+Set SSL Options (--ssl-opt="SSL_version => TLSv1" --ssl-opt="SSL_verify_mode => SSL_VERIFY_NONE").
 
 =item B<--reload-cache-time>
 

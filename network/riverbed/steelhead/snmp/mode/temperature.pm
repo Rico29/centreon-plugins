@@ -1,5 +1,5 @@
 #
-# Copyright 2017 Centreon (http://www.centreon.com/)
+# Copyright 2018 Centreon (http://www.centreon.com/)
 #
 # Centreon is a full-fledged industry-strength solution that meets
 # the needs in IT infrastructure and application monitoring for
@@ -57,10 +57,13 @@ sub run {
     my ($self, %options) = @_;
     $self->{snmp} = $options{snmp};
 
+    # STEELHEAD-MIB
     my $oid_systemTemperature = '.1.3.6.1.4.1.17163.1.1.2.9.0'; # in Celsius
+    # STEELHEAD-EX-MIB
+    my $oid_ex_systemTemperature = '.1.3.6.1.4.1.17163.1.51.2.9.0'; # in Celsius
 
-    my $result = $self->{snmp}->get_leef(oids => [$oid_systemTemperature], nothing_quit => 1);
-    my $temp = $result->{$oid_systemTemperature};
+    my $result = $self->{snmp}->get_leef(oids => [$oid_systemTemperature, $oid_ex_systemTemperature], nothing_quit => 1);
+    my $temp = defined($result->{$oid_systemTemperature}) ? $result->{$oid_systemTemperature} : $result->{$oid_ex_systemTemperature};
 
     my $exit = $self->{perfdata}->threshold_check(value => $temp, threshold => [ { label => 'critical', exit_litteral => 'critical' }, { label => 'warning', exit_litteral => 'warning' } ]);
 
@@ -84,7 +87,7 @@ __END__
 
 =head1 MODE
 
-Check the temperature of the system in Celcius (STEELHEAD-MIB).
+Check the temperature of the system in Celcius (STEELHEAD-MIB AND STEELHEAD-EX-MIB).
 
 =over 8
 
